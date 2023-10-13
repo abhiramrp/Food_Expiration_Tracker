@@ -1,0 +1,19 @@
+package com.example.foodexpirationtracker.authentication
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.example.foodexpirationtracker.R
+
+
+class LoginActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login)
+
+    }
+
+    private fun loginUser() {
+
+    }
+}
