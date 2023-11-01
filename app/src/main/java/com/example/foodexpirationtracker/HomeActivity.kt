@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -22,11 +23,6 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var auth: FirebaseAuth
 
-    private var sectionPageAdapter: SectionPageAdapter? = null
-
-    private val homeFragment = HomeFragment()
-    private val searchFragment = SearchFragment()
-    private val activityFragment = ActivityFragment()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,40 +32,22 @@ class HomeActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-        binding.logoutButton.setOnClickListener {
-            auth.signOut()
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
 
-        sectionPageAdapter = SectionPageAdapter(supportFragmentManager)
+    }
 
-        container.adapter = sectionPageAdapter
-
+    fun logout(v: View) {
+        auth.signOut()
+        startActivity(LoginActivity.newIntent(this))
+        finish()
     }
 
     override fun onStart() {
         super.onStart()
 
         if (auth.currentUser == null) {
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(LoginActivity.newIntent(this))
             finish()
         }
-    }
-
-
-    inner class SectionPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
-
-        override fun getItem(position: Int): Fragment {
-            return when(position) {
-                0 -> homeFragment
-                1 -> searchFragment
-                else -> activityFragment
-            }
-        }
-
-        override fun getCount() = 3
-
     }
 
     companion object {

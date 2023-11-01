@@ -17,11 +17,4 @@ class IngredientActivity : AppCompatActivity() {
 
     }
 
-    companion object {
-        val PARAM_USER_ID = "UserID"
-        fun newIntent(context: Context, userId: String?): Intent{
-            val intent = Intent(context, IngredientActivity::class.java)
-            intent.putExtra(PARAM_USER_ID, userId)
-        }
-    }
 }

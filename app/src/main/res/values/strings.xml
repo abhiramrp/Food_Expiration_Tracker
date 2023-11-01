@@ -3,4 +3,14 @@
     <string name="ingredientTitle">Ingredient Name:</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="registerLink">No account? Register</string>
+    <string name="loginLink">Already have an account? Login</string>
+    <string name="login">Log In</string>
+    <string name="logout">Log Out</string>
+    <string name="register">Register</string>
+    <string name="emailAddress">Email Address</string>
+    <string name="password">Password</string>
+
+
 </resources>

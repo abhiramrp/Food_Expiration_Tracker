@@ -1,11 +1,15 @@
 package com.example.foodexpirationtracker.authentication
 
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
+import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import com.example.foodexpirationtracker.HomeActivity
 import com.example.foodexpirationtracker.R
 import com.example.foodexpirationtracker.databinding.ActivityLoginBinding
@@ -18,30 +22,22 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 
-    private lateinit var userEmail: String
-    private lateinit var userPassword: String
-    private lateinit var loginInputsArray: Array<EditText>
+    private lateinit var userEmail: EditText
+    private lateinit var userPassword : EditText
 
     private lateinit var auth: FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         auth = Firebase.auth
 
-        loginInputsArray = arrayOf(binding.loginEmailAddress, binding.password)
-
-        binding.registerButton.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
-            finish()
-        }
-
-        binding.loginButton.setOnClickListener {
-            login()
-        }
+        userEmail = binding.editEmail
+        userPassword = binding.editPassword
 
     }
 
@@ -49,43 +45,56 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
 
         if (auth.currentUser != null) {
-            startActivity(Intent(this, HomeActivity::class.java))
+            startActivity(HomeActivity.newIntent(this))
             finish()
         }
 
     }
 
-    private fun validateInput(): Boolean {
-        val userEmail = loginInputsArray[0].text.toString().trim()
-        val userPassword = loginInputsArray[1].text.toString().trim()
 
-        if (userEmail.isEmpty() || userPassword.isEmpty()) {
+
+    private fun validateInput(): Boolean {
+        if(userEmail.text.toString().isNullOrEmpty()) {
+            userEmail.error = "Email required"
+            return false
+        }
+
+        if(userPassword.text.toString().isNullOrEmpty()) {
+            userPassword.error = "Password required"
             return false
         }
 
         return true
+
     }
 
-    private fun login() {
 
+
+    fun loginUser(v: View) {
         if (validateInput()) {
-            userEmail = loginInputsArray[0].text.toString().trim()
-            userPassword = loginInputsArray[1].text.toString().trim()
-
-            auth.signInWithEmailAndPassword(userEmail, userPassword)
+            auth.signInWithEmailAndPassword(userEmail.text.toString().trim(), userPassword.text.toString().trim())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        startActivity(Intent(this, HomeActivity::class.java))
+                        startActivity(HomeActivity.newIntent(this))
                         finish()
                     } else {
                         Log.w(ContentValues.TAG, "loginWithEmail:failure", task.exception)
+                        Toast.makeText(this, "Login error: ${task.exception?.localizedMessage}", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
 
     }
 
+    fun registerUser(v: View) {
+        startActivity(RegisterActivity.newIntent(this))
+        finish()
+    }
 
+
+    companion object {
+        fun newIntent(context: Context) = Intent(context, LoginActivity::class.java)
+    }
 
 
 }
