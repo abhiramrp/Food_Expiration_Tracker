@@ -9,6 +9,9 @@ import com.example.foodexpirationtracker.R
 
 
 class SearchFragment : IngredientFragment() {
+    override fun updateList() {
+        TODO("Not yet implemented")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
