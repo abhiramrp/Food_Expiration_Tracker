@@ -6,73 +6,77 @@
     android:layout_height="match_parent"
     tools:context=".ingredient.IngredientActivity">
 
-    <TextView
-        android:id="@+id/createIngredientHeading"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/titleTIL"
+        android:layout_width="@dimen/standard_width"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:text="Add an Ingredient"
+        android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/ingredientHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="112dp"
-        android:text="@string/ingredientTitle"
-        app:layout_constraintEnd_toStartOf="@+id/ingredientName"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createIngredientHeading" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingredient"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/ingredientName"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dateTIL"
+        android:layout_width="@dimen/standard_width"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:hint="Ingredient Title"
-        android:inputType="text"
+        android:layout_marginTop="161dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createIngredientHeading" />
-
-    <EditText
-        android:id="@+id/expiryDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="48dp"
-        android:ems="10"
-        android:hint="Expiry Date"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredientName" />
-
-    <TextView
-        android:id="@+id/expiryDateHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="Expiry Date"
-        app:layout_constraintEnd_toStartOf="@+id/expiryDate"
-        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredientHeading" />
+        app:layout_constraintTop_toBottomOf="@+id/titleTIL">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="setDatePicker"
+            android:hint="Date"
+            android:inputType="date" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/notesTIL"
+        android:layout_width="@dimen/standard_width"
+        android:layout_height="0dp"
+        android:layout_marginTop="90dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateTIL">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Notes (Optional)"
+            android:inputType="text|textEnableTextConversionSuggestions|textMultiLine" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="48dp"
         android:clickable="true"
+        android:contentDescription="Submit"
+        android:onClick="postIngredient"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_send" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

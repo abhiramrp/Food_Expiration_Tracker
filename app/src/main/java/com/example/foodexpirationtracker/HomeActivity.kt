@@ -1,6 +1,5 @@
 package com.example.foodexpirationtracker
 
-import android.app.assist.AssistContent
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,21 +7,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.foodexpirationtracker.authentication.LoginActivity
 import com.example.foodexpirationtracker.databinding.ActivityHomeBinding
 import com.example.foodexpirationtracker.fragments.*
+import com.example.foodexpirationtracker.ingredient.IngredientActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import java.lang.IllegalArgumentException
-import java.util.ArrayList
 
 
 class HomeActivity : AppCompatActivity() {
@@ -33,6 +27,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
     private lateinit var adapter: PageAdapter
     private lateinit var bottomNavigationView: BottomNavigationView
+    private var userId: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +36,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = Firebase.auth
+        userId = auth.currentUser?.uid
 
         viewPager = binding.viewPager
         adapter = PageAdapter(this)
@@ -64,23 +60,27 @@ class HomeActivity : AppCompatActivity() {
             }
         })
 
-
     }
 
-
-    fun logout(v: View) {
-        auth.signOut()
-        startActivity(LoginActivity.newIntent(this))
-        finish()
+    fun addIngedient(v: View) {
+        startActivity(IngredientActivity.newIntent(this, userId))
     }
 
-    override fun onStart() {
-        super.onStart()
-
+    private fun checkLogin() {
         if (auth.currentUser == null) {
             startActivity(LoginActivity.newIntent(this))
             finish()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        checkLogin()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkLogin()
     }
 
 
