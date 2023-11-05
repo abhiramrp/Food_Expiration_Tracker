@@ -6,9 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.foodexpirationtracker.R
+import com.example.foodexpirationtracker.ingredient.ListAdapter
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class SearchFragment : IngredientFragment() {
+
+    private var ingredientAdapter: ListAdapter ?= null
+    private lateinit var firebaseDb : FirebaseFirestore
+    private var userId: String? = null
+
+
     override fun updateList() {
         TODO("Not yet implemented")
     }

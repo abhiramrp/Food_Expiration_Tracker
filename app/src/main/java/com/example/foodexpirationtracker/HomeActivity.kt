@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -60,7 +61,10 @@ class HomeActivity : AppCompatActivity() {
             }
         })
 
+
     }
+
+    // BUTTON FUNCTIONS
 
     fun addIngedient(v: View) {
         startActivity(IngredientActivity.newIntent(this, userId))
