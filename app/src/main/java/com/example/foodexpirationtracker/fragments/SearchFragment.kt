@@ -1,8 +1,6 @@
 package com.example.foodexpirationtracker.fragments
 
 import android.os.Bundle
-import android.provider.ContactsContract.Data
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,27 +8,19 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodexpirationtracker.DATA_INGREDIENTS
 import com.example.foodexpirationtracker.DATA_INGREDIENTS_KEYWORDS
-import com.example.foodexpirationtracker.DATA_INGREDIENTS_TITLE
-import com.example.foodexpirationtracker.R
 import com.example.foodexpirationtracker.databinding.FragmentSearchBinding
 import com.example.foodexpirationtracker.ingredient.Ingredient
-import com.example.foodexpirationtracker.ingredient.IngredientListener
+import com.example.foodexpirationtracker.listeners.IngredientListener
 import com.example.foodexpirationtracker.ingredient.ListAdapter
+import com.example.foodexpirationtracker.listeners.IngredientListenerImpl
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.ktx.app
 
 
 class SearchFragment : IngredientFragment() {
 
     private lateinit var binding: FragmentSearchBinding
-
-    private var ingredientAdapter: ListAdapter ?= null
-    private val firebaseDb = Firebase.firestore
-    private var userId : String? = null
-    private val listener: IngredientListener?=null
 
     private lateinit var searchQuery: String
 
@@ -48,6 +38,8 @@ class SearchFragment : IngredientFragment() {
 
         userId = FirebaseAuth.getInstance().currentUser?.uid
 
+        listener = IngredientListenerImpl(binding.ingredientList, callback)
+
         ingredientAdapter = ListAdapter(userId!!, arrayListOf())
         ingredientAdapter?.setListener(listener)
         binding.ingredientList?.apply {
@@ -55,6 +47,14 @@ class SearchFragment : IngredientFragment() {
             adapter = ingredientAdapter
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
+
+        binding.ingredientList?.adapter = ingredientAdapter
+
+        binding.swipeRefresh.setOnRefreshListener {
+            binding.swipeRefresh.isRefreshing = false
+            updateList()
+        }
+
     }
 
     fun getQuery(s: String) {

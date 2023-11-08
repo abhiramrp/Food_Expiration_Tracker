@@ -15,13 +15,14 @@ import com.example.foodexpirationtracker.authentication.LoginActivity
 import com.example.foodexpirationtracker.databinding.ActivityHomeBinding
 import com.example.foodexpirationtracker.fragments.*
 import com.example.foodexpirationtracker.ingredient.IngredientActivity
+import com.example.foodexpirationtracker.listeners.HomeCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), HomeCallback {
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var auth: FirebaseAuth
@@ -131,6 +132,10 @@ class HomeActivity : AppCompatActivity() {
 
     companion object {
         fun newIntent(context: Context) = Intent(context, HomeActivity::class.java)
+    }
+
+    override fun onRefresh() {
+        currentFragment.updateList()
     }
 
 

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodexpirationtracker.R
 import com.example.foodexpirationtracker.databinding.ItemIngredientBinding
+import com.example.foodexpirationtracker.listeners.IngredientListener
 import java.util.ArrayList
 
 class ListAdapter (val userId: String, val ingredients: ArrayList<Ingredient>) : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
