@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -30,6 +31,12 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
     private var userId: String? = null
 
+    private lateinit var homeFragment: HomeFragment
+    private lateinit var searchFragment: SearchFragment
+    private lateinit var activityFragment: ActivityFragment
+
+    private lateinit var currentFragment: IngredientFragment
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +45,13 @@ class HomeActivity : AppCompatActivity() {
 
         auth = Firebase.auth
         userId = auth.currentUser?.uid
+
+        homeFragment = HomeFragment()
+        searchFragment = SearchFragment()
+        activityFragment = ActivityFragment()
+
+        currentFragment = homeFragment
+
 
         viewPager = binding.viewPager
         adapter = PageAdapter(this)
@@ -55,12 +69,24 @@ class HomeActivity : AppCompatActivity() {
             true
         }
 
+
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 bottomNavigationView.menu.getItem(position).isChecked = true
             }
         })
 
+        binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchFragment.getQuery(query.toString())
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                searchFragment.getQuery(newText.toString())
+                return true
+            }
+        })
 
     }
 
@@ -93,9 +119,9 @@ class HomeActivity : AppCompatActivity() {
 
         override fun createFragment(position: Int): Fragment {
             return when(position) {
-                0 -> HomeFragment()
-                1 -> SearchFragment()
-                else -> ActivityFragment()
+                0 -> homeFragment
+                1 -> searchFragment
+                else -> activityFragment
             }
         }
 

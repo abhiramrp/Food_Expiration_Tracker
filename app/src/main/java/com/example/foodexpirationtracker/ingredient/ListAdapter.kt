@@ -1,5 +1,6 @@
 package com.example.foodexpirationtracker.ingredient
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -39,9 +40,9 @@ class ListAdapter (val userId: String, val ingredients: ArrayList<Ingredient>) :
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.item_ingredient, parent, false)
+    )
 
     override fun getItemCount(): Int = ingredients.size
 

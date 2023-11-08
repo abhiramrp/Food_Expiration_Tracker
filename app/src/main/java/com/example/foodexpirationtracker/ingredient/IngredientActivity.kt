@@ -78,13 +78,23 @@ class IngredientActivity : AppCompatActivity() {
 
     }
 
+    private fun generateKeywords(name: String): List<String> {
+        val keywords = mutableListOf<String>()
+        for (i in 0 until name.length) {
+            for (j in (i+1)..name.length) {
+                keywords.add(name.slice(i until j))
+            }
+        }
+        return keywords
+    }
+
     fun postIngredient(v: View) {
         val title = ingredientTitle.text.toString()
         val ingredientID = firebaseDb.collection(DATA_INGREDIENTS).document()
         val expiryDate = ingredientDate.text.toString()
         val notes = ingredientNotes.text.toString()
 
-        val ingredient = Ingredient(ingredientID.id, title, expiryDate, notes)
+        val ingredient = Ingredient(ingredientID.id, title, generateKeywords(title), expiryDate, notes)
 
         ingredientID.set(ingredient)
             .addOnCompleteListener{ finish() }
@@ -92,6 +102,7 @@ class IngredientActivity : AppCompatActivity() {
                 e.printStackTrace()
                 Toast.makeText(this, "Failed to add ingredient", Toast.LENGTH_SHORT).show()
             }
+
 
 
     }
