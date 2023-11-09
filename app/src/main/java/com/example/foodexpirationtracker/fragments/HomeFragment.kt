@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodexpirationtracker.DATA_INGREDIENTS
+import com.example.foodexpirationtracker.DATA_INREDIENTS_USERID
 import com.example.foodexpirationtracker.databinding.FragmentHomeBinding
 import com.example.foodexpirationtracker.ingredient.Ingredient
 import com.example.foodexpirationtracker.listeners.IngredientListener
@@ -44,7 +45,7 @@ class HomeFragment : IngredientFragment() {
 
     override fun updateList() {
         binding.ingredientList?.visibility = View.GONE
-        firebaseDb.collection(DATA_INGREDIENTS).get()
+        firebaseDb.collection(DATA_INGREDIENTS).whereArrayContains(DATA_INREDIENTS_USERID, userId.toString()).get()
             .addOnSuccessListener { list ->
                 binding.ingredientList?.visibility = View.VISIBLE
                 val ingredients = arrayListOf<Ingredient>()

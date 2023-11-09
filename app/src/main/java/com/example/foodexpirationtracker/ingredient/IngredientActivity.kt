@@ -94,7 +94,7 @@ class IngredientActivity : AppCompatActivity() {
         val expiryDate = ingredientDate.text.toString()
         val notes = ingredientNotes.text.toString()
 
-        val ingredient = Ingredient(ingredientID.id, title, generateKeywords(title), expiryDate, notes)
+        val ingredient = Ingredient(ingredientID.id, title, userId, generateKeywords(title), expiryDate, notes)
 
         ingredientID.set(ingredient)
             .addOnCompleteListener{ finish() }
