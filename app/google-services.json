@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "1025545472001",
-    "project_id": "food-expiration-tracker-52d4f",
-    "storage_bucket": "food-expiration-tracker-52d4f.appspot.com"
+    "project_number": "63316636357",
+    "project_id": "foodexpirationtracker",
+    "storage_bucket": "foodexpirationtracker.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1025545472001:android:e0ec039e22b864139ad800",
+        "mobilesdk_app_id": "1:63316636357:android:4a23100b39601c6e2036ac",
         "android_client_info": {
           "package_name": "com.example.foodexpirationtracker"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAQElE9Lsi_UcrPeTALGKxH-tj0JKB64hE"
+          "current_key": "AIzaSyCZeiQ58VoWzt2VXecsZYA4YUll0tTkihM"
         }
       ],
       "services": {

@@ -9,9 +9,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.example.foodexpirationtracker" />
-                  <option name="mobileSdkAppId" value="1:1025545472001:android:e0ec039e22b864139ad800" />
-                  <option name="projectId" value="food-expiration-tracker-52d4f" />
-                  <option name="projectNumber" value="1025545472001" />
+                  <option name="mobileSdkAppId" value="1:63316636357:android:4a23100b39601c6e2036ac" />
+                  <option name="projectId" value="foodexpirationtracker" />
+                  <option name="projectNumber" value="63316636357" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

@@ -12,6 +12,7 @@
     <string name="emailAddress">Email Address</string>
     <string name="password">Password</string>
     <string name="hint_search">Find Ingredient</string>
+    <string name="title_activity_splash">SplashActivity</string>
 
 
 </resources>
