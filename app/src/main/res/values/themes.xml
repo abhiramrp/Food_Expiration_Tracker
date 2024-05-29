@@ -12,6 +12,8 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="Theme.FoodExpirationTracker" parent="Base.Theme.FoodExpirationTracker" />
+
     <style name="Theme.AppSplash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/light_green</item>
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_round</item>
@@ -19,5 +21,4 @@
         <item name="postSplashScreenTheme">@style/Theme.FoodExpirationTracker</item>
     </style>
 
-    <style name="Theme.FoodExpirationTracker" parent="Base.Theme.FoodExpirationTracker" />
 </resources>
